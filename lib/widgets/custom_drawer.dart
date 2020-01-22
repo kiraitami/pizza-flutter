@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_virtual_market/models/user_model.dart';
+import 'package:flutter_app_virtual_market/screens/login_screen.dart';
 import 'package:flutter_app_virtual_market/tabs/main_drawer_pages_enum.dart';
 import 'package:flutter_app_virtual_market/tiles/drawer_tile.dart';
+import 'package:scoped_model/scoped_model.dart';
 
 class CustomDrawer extends StatelessWidget {
 
@@ -45,16 +48,32 @@ class CustomDrawer extends StatelessWidget {
                     Positioned(
                       left: 0.0,
                       bottom: 0.0,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text('Hello,', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                          GestureDetector(
-                            child: Text('Sign Ig,', style: TextStyle(color: Theme.of(context).primaryColor ,fontSize: 16.0, fontWeight: FontWeight.bold)),
-                            onTap: (){},
-                          )
-                        ],
-                      ),
+                      child: ScopedModelDescendant<User>(
+                        builder: (context, child, model){
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text('Hello, ${model.isLoggedIn() ? model.userData['name'] : '' }', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                              GestureDetector(
+                                child: Text(
+                                  model.isLoggedIn() ? 'Sign Out' : 'Sign Ig or Register,',
+                                  style: TextStyle(color: Theme.of(context).primaryColor ,fontSize: 16.0, fontWeight: FontWeight.bold)
+                                ),
+                                onTap: (){
+                                 if (model.isLoggedIn()){
+                                   model.signOut();
+                                 }
+                                 else {
+                                   Navigator.of(context).push(
+                                       MaterialPageRoute(builder: (context) => LoginScreen())
+                                   );
+                                 }
+                                },
+                              )
+                            ],
+                          );
+                        }
+                      )
                     )
                   ],
                 ),
@@ -62,7 +81,7 @@ class CustomDrawer extends StatelessWidget {
 
               Divider(),
 
-              DrawerTile(Icons.home, 'home', pageController, Page.HOME),
+              DrawerTile(Icons.home, 'Home', pageController, Page.HOME),
               DrawerTile(Icons.list, 'Menu', pageController, Page.MENU),
               DrawerTile(Icons.location_on, 'Locations', pageController, Page.LOCATIONS),
               DrawerTile(Icons.playlist_add_check, 'Orders', pageController, Page.ORDERS)
