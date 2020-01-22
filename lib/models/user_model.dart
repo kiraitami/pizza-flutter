@@ -106,5 +106,4 @@ class User extends Model {
     notifyListeners();
   }
 
-
 }
