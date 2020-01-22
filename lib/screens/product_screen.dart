@@ -1,6 +1,11 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_virtual_market/datas/cart_product.dart';
 import 'package:flutter_app_virtual_market/datas/product_data.dart';
+import 'package:flutter_app_virtual_market/models/cart_model.dart';
+import 'package:flutter_app_virtual_market/models/user_model.dart';
+import 'package:flutter_app_virtual_market/screens/cart_screen.dart';
+import 'package:flutter_app_virtual_market/screens/login_screen.dart';
 
 class ProductScreen extends StatefulWidget {
 
@@ -19,12 +24,15 @@ class _ProductScreenState extends State<ProductScreen> {
 
   _ProductScreenState(this.product);
 
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
 
     final Color primaryColor = Theme.of(context).primaryColor;
 
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text(product.title)
       ),
@@ -41,7 +49,7 @@ class _ProductScreenState extends State<ProductScreen> {
               dotBgColor: Colors.transparent,
               dotColor: Colors.white,
               autoplay: true,
-              autoplayDuration: Duration(seconds: 2)
+              autoplayDuration: Duration(seconds: 3)
             ),
           ),
 
@@ -102,9 +110,39 @@ class _ProductScreenState extends State<ProductScreen> {
                   height: 44.0,
                   child: RaisedButton(
                     onPressed: desiredSize != null ? (){
+                      if (User.of(context).isLoggedIn()){
+                        CartProduct cartProduct = CartProduct();
+                        cartProduct.size = desiredSize;
+                        cartProduct.amount = 1;
+                        cartProduct.cart_id = product.id;
+                        cartProduct.category = product.category;
 
+                        CartModel.of(context).addCartItem(cartProduct);
+
+                        _scaffoldKey.currentState.showSnackBar(
+                            SnackBar(
+                              content: Text('${product.title} added to Cart'),
+                              backgroundColor: Theme.of(context).primaryColor,
+                              duration: Duration(seconds: 7),
+                              action: SnackBarAction(
+                                label: 'View Cart',
+                                textColor: Colors.white,
+                                onPressed: (){
+                                  Navigator.of(context).push(
+                                      MaterialPageRoute(builder: (context)=>CartScreen())
+                                  );
+                                },
+                              ),
+                            )
+                        );
+                      }
+                      else {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context)=>LoginScreen())
+                        );
+                      }
                     } : null,
-                    child: Text('I want this', style: TextStyle(fontSize: 18.0)),
+                    child: Text(User.of(context).isLoggedIn() ? 'I wish this' : 'Login to order', style: TextStyle(fontSize: 18.0)),
                     textColor: Colors.white,
                     color: primaryColor,
                   ),

@@ -11,6 +11,8 @@ class User extends Model {
   Map<String, dynamic> userData = Map();
 
   bool isLoading = false;
+  
+  static User of(BuildContext context) => ScopedModel.of<User>(context);
 
 
   @override
@@ -43,6 +45,7 @@ class User extends Model {
       notifyListeners();
 
     }).catchError((error){
+      print(error);
       onFailure();
       isLoading = false;
       notifyListeners();
@@ -66,6 +69,7 @@ class User extends Model {
 
         })
         .catchError( (e){
+          print(e);
           onFailure();
           isLoading = false;
           notifyListeners();

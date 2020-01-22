@@ -104,8 +104,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                               Map<String, dynamic> userData = {
                                 'name': _nameController.text,
-                                'email': _nameController.text,
-                                'address': _nameController.text
+                                'email': _emailController.text,
+                                'address': _addressController.text
                               };
 
                               model.register(
