@@ -8,7 +8,7 @@
 
 <img src="demo/demo5.png" width="220" height="400"/> | <img src="demo/demo6.png" width="220" height="400"/> | <img src="demo/demo7.png" width="220" height="400"/>
 
-<img src="demo/demo8.png" width="220" height="400"/> | <img src="demo/demo9png" width="220" height="400"/> 
+<img src="demo/demo8.png" width="220" height="400"/> | <img src="demo/demo9.png" width="220" height="400"/> 
 
 
 ## Getting Started
