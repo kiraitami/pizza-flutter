@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_virtual_market/tabs/category_tab.dart';
 import 'package:flutter_app_virtual_market/tabs/home_tab.dart';
+import 'package:flutter_app_virtual_market/tabs/oders_tab.dart';
 import 'package:flutter_app_virtual_market/widgets/cart_button.dart';
 import 'package:flutter_app_virtual_market/widgets/custom_drawer.dart';
 
@@ -31,7 +32,15 @@ class HomeScreen extends StatelessWidget {
         ),
 
         Container(color: Colors.green),
-        Container(color: Colors.blueGrey),
+
+        Scaffold(
+          appBar: AppBar(
+            title: Text('My Orders'),
+            centerTitle: true,
+          ),
+          drawer: CustomDrawer(_pageController),
+          body: OrdersTab()
+        ),
       ],
     );
   }

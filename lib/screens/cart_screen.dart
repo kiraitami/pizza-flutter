@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_virtual_market/models/cart_model.dart';
 import 'package:flutter_app_virtual_market/models/user_model.dart';
 import 'package:flutter_app_virtual_market/screens/login_screen.dart';
+import 'package:flutter_app_virtual_market/screens/order_screen.dart';
 import 'package:flutter_app_virtual_market/tiles/cart_tile.dart';
 import 'package:flutter_app_virtual_market/widgets/cart_price.dart';
 import 'package:flutter_app_virtual_market/widgets/discount_card.dart';
@@ -81,7 +82,14 @@ class CartScreen extends StatelessWidget {
 
                 DiscountCard(),
 
-                CartPrice((){})
+                CartPrice(() async {
+                  String orderId = await model.finishOrder();
+                  if (orderId != null){
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context)=>OrderScreen(orderId))
+                    );
+                  }
+                })
               ],
             );
           }
