@@ -40,7 +40,15 @@ class HomeScreen extends StatelessWidget {
           body: OrdersTab()
         ),
 
-        Container(color: Colors.green),
+        Scaffold(
+            appBar: AppBar(
+              title: Text('Call'),
+              centerTitle: true,
+            ),
+            drawer: CustomDrawer(_pageController),
+            //body: OrdersTab()
+        )
+
       ],
     );
   }

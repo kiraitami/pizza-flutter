@@ -11,6 +11,7 @@ class CategoryTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
       leading: CircleAvatar(
         radius: 25.0,
         backgroundColor: Colors.transparent,
