@@ -1,6 +1,15 @@
-# flutter_app_virtual_market
+# Pizza
 
-Online Marketplace
+
+
+## Screens Demo
+
+<img src="demo/demo1.png" width="220" height="400"/> | <img src="demo/demo2.png" width="220" height="400"/> | <img src="demo/demo3.png" width="220" height="400"/>
+
+<img src="demo/demo4.png" width="220" height="400"/> | <img src="demo/demo5.png" width="220" height="400"/> | <img src="demo/demo6.png" width="220" height="400"/>
+
+<img src="demo/demo7.png" width="220" height="400"/> | <img src="demo/demo8.png" width="220" height="400"/> | <img src="demo/demo9.png" width="220" height="400"/>
+
 
 ## Getting Started
 
