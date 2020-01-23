@@ -39,7 +39,7 @@ class OrderTile extends StatelessWidget {
 
                   SizedBox(height: 4.0),
 
-                  Text('Order status: $orderId', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Text('Order status:\n', style: TextStyle(fontWeight: FontWeight.bold)),
 
                   SizedBox(height: 4.0),
 
@@ -50,9 +50,11 @@ class OrderTile extends StatelessWidget {
                       _buildLine(),
                       _buildCircle('2', 'Delivering', status, 2),
                       _buildLine(),
-                      _buildCircle('3', 'Finished', status, 3),
+                      _buildCircle('3', 'Finished', status, 3)
                     ],
-                  )
+                  ),
+
+                  SizedBox(height: 16.0)
 
                 ],
               );
@@ -73,11 +75,11 @@ class OrderTile extends StatelessWidget {
   }
 
   String _buildProductsText(DocumentSnapshot snapshot){
-    String text = 'Description:\n';
+    String text = '\nDescription:\n\n';
     for (LinkedHashMap p in snapshot.data['products']){
-      text += '${p['amount']} x ${p['product']['title']} (R\$ ${p['product']['price'].toStringAsFixed(2)}\n)';
+      text += '${p['amount']} x ${p['product']['title']}\n(R\$ ${p['product']['price'].toStringAsFixed(2)})\n';
     }
-    text += 'Total: R\$${snapshot.data['totalPrice'].toStringAsFixed(2)}';
+    text += '\nTotal: R\$${snapshot.data['totalPrice'].toStringAsFixed(2)}\n';
 
     return text;
   }

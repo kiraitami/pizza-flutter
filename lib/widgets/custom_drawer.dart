@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_virtual_market/models/user_model.dart';
 import 'package:flutter_app_virtual_market/screens/login_screen.dart';
 import 'package:flutter_app_virtual_market/tabs/main_drawer_pages_enum.dart';
 import 'package:flutter_app_virtual_market/tiles/drawer_tile.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomDrawer extends StatelessWidget {
 
@@ -85,13 +87,37 @@ class CustomDrawer extends StatelessWidget {
 
               DrawerTile(Icons.home, 'Home', pageController, Page.HOME),
               DrawerTile(Icons.list, 'Menu', pageController, Page.MENU),
-              DrawerTile(Icons.location_on, 'Locations', pageController, Page.LOCATIONS),
-              DrawerTile(Icons.playlist_add_check, 'Orders', pageController, Page.ORDERS)
+              DrawerTile(Icons.playlist_add_check, 'Orders', pageController, Page.ORDERS),
+              Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () async {
+                    String phone = await _getPhoneNumber();
+                    launch('tel:$phone');
+                  },
+                  child: Container(
+                    height: 60.0,
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.call, size: 32.0),
+                        SizedBox(width: 32.0),
+                        Text('Call', style: TextStyle(fontSize: 16.0, color: Colors.black))
+                      ],
+                    ),
+                  ),
+                ),
+              )
+              //DrawerTile(Icons.call, 'Call', pageController, Page.CALL),
 
             ],
           )
         ],
       ),
     );
+  }
+
+  Future<String> _getPhoneNumber() async{
+    DocumentSnapshot doc = await Firestore.instance.collection('phone').document('phone').get();
+    return doc.data['phone'];
   }
 }

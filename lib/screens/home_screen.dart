@@ -31,8 +31,6 @@ class HomeScreen extends StatelessWidget {
           floatingActionButton: CartButton(),
         ),
 
-        Container(color: Colors.green),
-
         Scaffold(
           appBar: AppBar(
             title: Text('My Orders'),
@@ -41,6 +39,8 @@ class HomeScreen extends StatelessWidget {
           drawer: CustomDrawer(_pageController),
           body: OrdersTab()
         ),
+
+        Container(color: Colors.green),
       ],
     );
   }

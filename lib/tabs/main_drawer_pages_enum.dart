@@ -1,6 +1,6 @@
 enum Page {
   HOME,
   MENU,
-  LOCATIONS,
-  ORDERS
+  ORDERS,
+  CALL,
 }
